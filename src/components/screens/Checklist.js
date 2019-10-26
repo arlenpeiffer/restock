@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { Text, Button } from 'react-native';
+import Container from 'common/Container';
 
 const Checklist = props => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Container>
       <Text>Checklist Screen</Text>
       <Button
         title="Go to Form Screen"
         onPress={() => props.navigation.navigate('Form')}
       />
-    </View>
+    </Container>
   );
 };
 
