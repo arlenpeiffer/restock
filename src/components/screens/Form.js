@@ -1,11 +1,16 @@
 import React from 'react';
-import { Text, Button } from 'react-native';
+import { Button } from 'react-native';
+
 import Container from 'common/Container';
+import Section from 'form/Section';
+import { inventory } from 'data/inventory';
 
 const Form = props => {
   return (
     <Container>
-      <Text>Form Screen</Text>
+      {inventory.map(section => (
+        <Section key={section.name} section={section} />
+      ))}
       <Button
         title="Go to Checklist Screen"
         onPress={() => props.navigation.navigate('Checklist')}
