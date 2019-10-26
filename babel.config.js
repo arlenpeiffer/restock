@@ -5,8 +5,11 @@ module.exports = function(api) {
     plugins: [
       ['module-resolver', {
         alias: {
+          checklist: './src/components/checklist',
           common: './src/components/common',
           constants: './src/constants',
+          data: './src/data',
+          form: './src/components/form',
           images: './assets/images',
           screens: './src/components/screens'
         }
