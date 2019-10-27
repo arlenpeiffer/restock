@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Button } from 'react-native';
 
 import OrderContext from 'contexts/OrderContext';
-import Container from 'common/Container';
+import ScreenContainer from 'common/ScreenContainer';
 import Section from 'form/Section';
 import { inventory } from 'data/inventory';
 
@@ -11,7 +11,7 @@ const Form = props => {
   console.log('Form', order);
 
   return (
-    <Container>
+    <ScreenContainer>
       {inventory.map(section => (
         <Section key={section.name} section={section} />
       ))}
@@ -19,7 +19,7 @@ const Form = props => {
         title="Go to Checklist Screen"
         onPress={() => props.navigation.navigate('Checklist')}
       />
-    </Container>
+    </ScreenContainer>
   );
 };
 
