@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -16,16 +16,14 @@ const SectionItemContainer = styled.View`
 `;
 
 const SectionItem = ({ item }) => {
+  const { handleUpdateAmount } = useContext(OrderContext);
+
   return (
     <SectionItemContainer>
-      <OrderContext.Consumer>
-        {({ handleUpdateAmount }) => (
-          <View>
-            <Text>{item}:</Text>
-            <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
-          </View>
-        )}
-      </OrderContext.Consumer>
+      <View>
+        <Text>{item}:</Text>
+        <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
+      </View>
     </SectionItemContainer>
   );
 };
