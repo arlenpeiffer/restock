@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 
-import AppContext from 'contexts/AppContext';
+import OrderContext from 'contexts/OrderContext';
 import Counter from 'form/Counter';
 
 const SectionItemContainer = styled.View`
@@ -18,14 +18,14 @@ const SectionItemContainer = styled.View`
 const SectionItem = ({ item }) => {
   return (
     <SectionItemContainer>
-      <AppContext.Consumer>
+      <OrderContext.Consumer>
         {({ handleUpdateAmount }) => (
           <View>
             <Text>{item}:</Text>
             <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
           </View>
         )}
-      </AppContext.Consumer>
+      </OrderContext.Consumer>
     </SectionItemContainer>
   );
 };

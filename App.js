@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import AppContext from 'contexts/AppContext';
+import OrderContext from 'contexts/OrderContext';
 import Form from 'screens/Form';
 import Checklist from 'screens/Checklist';
 
@@ -29,9 +29,9 @@ const App = () => {
   };
 
   return (
-    <AppContext.Provider value={{ order, handleUpdateAmount }}>
+    <OrderContext.Provider value={{ order, handleUpdateAmount }}>
       <AppContainer />
-    </AppContext.Provider>
+    </OrderContext.Provider>
   );
 };
 
