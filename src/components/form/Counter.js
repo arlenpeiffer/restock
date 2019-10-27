@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import styled from 'styled-components/native';
+import CounterButton from 'form/CounterButton';
+
+const CounterContainer = styled.View`
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+`;
+
+const CounterDisplay = styled.Text`
+  font-size: 16;
+  font-weight: 500;
+  padding: 10px;
+  text-align: center;
+  width: 50px;
+`;
 
 const Counter = ({ item, handleUpdateAmount }) => {
   const [amount, setAmount] = useState(0);
@@ -8,14 +25,25 @@ const Counter = ({ item, handleUpdateAmount }) => {
     amount && handleUpdateAmount(item, amount);
   }, [amount]);
 
-  const incrementAmount = () => {
+  const increment = () => {
     setAmount(amount + 1);
   };
 
+  const decrement = () => {
+    amount && setAmount(amount - 1);
+  };
+
   return (
-    <View>
-      <Text onPress={incrementAmount}>{amount}</Text>
-    </View>
+    <CounterContainer>
+      <CounterButton
+        label="-"
+        position="left"
+        disabled={!amount}
+        onPress={decrement}
+      />
+      <CounterDisplay>{amount}</CounterDisplay>
+      <CounterButton label="+" position="right" onPress={increment} />
+    </CounterContainer>
   );
 };
 
