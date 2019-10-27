@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -19,8 +19,17 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
+  const [order, setOrder] = useState({});
+
+  const handleUpdateAmount = (item, amount) => {
+    setOrder({
+      ...order,
+      [item]: amount
+    });
+  };
+
   return (
-    <AppContext.Provider value={[]}>
+    <AppContext.Provider value={{ order, handleUpdateAmount }}>
       <AppContainer />
     </AppContext.Provider>
   );

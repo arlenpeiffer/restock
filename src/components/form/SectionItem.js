@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
+import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
+
+import AppContext from 'contexts/AppContext';
+import Counter from 'form/Counter';
 
 const SectionItemContainer = styled.View`
   align-items: center;
@@ -13,13 +16,16 @@ const SectionItemContainer = styled.View`
 `;
 
 const SectionItem = ({ item }) => {
-  const [count, setCount] = useState(0);
-
   return (
     <SectionItemContainer>
-      <Text onPress={() => setCount(count + 1)}>
-        {item}: {count}
-      </Text>
+      <AppContext.Consumer>
+        {({ handleUpdateAmount }) => (
+          <View>
+            <Text>{item}:</Text>
+            <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
+          </View>
+        )}
+      </AppContext.Consumer>
     </SectionItemContainer>
   );
 };
