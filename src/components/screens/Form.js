@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'react-native';
 
+import OrderContext from 'contexts/OrderContext';
 import Container from 'common/Container';
 import Section from 'form/Section';
 import { inventory } from 'data/inventory';
 
 const Form = props => {
+  const { order } = useContext(OrderContext);
+  console.log('Form', order);
+
   return (
     <Container>
       {inventory.map(section => (

@@ -8,6 +8,7 @@ module.exports = function(api) {
           checklist: './src/components/checklist',
           common: './src/components/common',
           constants: './src/constants',
+          contexts: './src/contexts',
           data: './src/data',
           form: './src/components/form',
           images: './assets/images',
