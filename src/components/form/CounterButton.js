@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { Feather } from 'icons';
 
 const CounterButtonContainer = styled.TouchableOpacity`
   align-items: center;
@@ -12,11 +13,11 @@ const CounterButtonContainer = styled.TouchableOpacity`
   width: 35px;
 `;
 
-const CounterButtonLabel = styled.Text`
+const CounterButtonLabel = styled(Feather)`
   color: ${props => (props.disabled ? 'darkgrey' : 'black')};
 `;
 
-const CounterButton = ({ disabled, label, onPress, position }) => {
+const CounterButton = ({ disabled, icon, onPress, position }) => {
   return (
     <CounterButtonContainer
       activeOpacity={disabled ? 1 : 0.9}
@@ -24,7 +25,7 @@ const CounterButton = ({ disabled, label, onPress, position }) => {
       onPress={onPress}
       position={position}
     >
-      <CounterButtonLabel disabled={disabled}>{label}</CounterButtonLabel>
+      <CounterButtonLabel name={icon} size={18} disabled={disabled} />
     </CounterButtonContainer>
   );
 };

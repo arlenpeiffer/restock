@@ -36,13 +36,13 @@ const Counter = ({ item, handleUpdateAmount }) => {
   return (
     <CounterContainer>
       <CounterButton
-        label="-"
+        icon="minus"
         position="left"
         disabled={!amount}
         onPress={decrement}
       />
       <CounterDisplay>{amount}</CounterDisplay>
-      <CounterButton label="+" position="right" onPress={increment} />
+      <CounterButton icon="plus" position="right" onPress={increment} />
     </CounterContainer>
   );
 };
