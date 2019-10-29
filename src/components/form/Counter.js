@@ -3,19 +3,22 @@ import styled from 'styled-components/native';
 import CounterButton from 'form/CounterButton';
 
 const CounterContainer = styled.View`
-  align-items: center;
-  background-color: white;
-  display: flex;
+  border: 0.5px solid darkgrey;
+  border-radius: 3;
   flex-direction: row;
   margin-top: 10px;
 `;
 
-const CounterDisplay = styled.Text`
-  font-size: 16;
+const CounterDisplay = styled.View`
+  background-color: white;
+  justify-content: center;
+  width: 75px;
+`;
+
+const CounterDisplayText = styled.Text`
+  font-size: 18;
   font-weight: 500;
-  padding: 10px;
   text-align: center;
-  width: 50px;
 `;
 
 const Counter = ({ item, handleUpdateAmount }) => {
@@ -41,7 +44,9 @@ const Counter = ({ item, handleUpdateAmount }) => {
         disabled={!amount}
         onPress={decrement}
       />
-      <CounterDisplay>{amount}</CounterDisplay>
+      <CounterDisplay>
+        <CounterDisplayText>{amount}</CounterDisplayText>
+      </CounterDisplay>
       <CounterButton icon="plus" position="right" onPress={increment} />
     </CounterContainer>
   );

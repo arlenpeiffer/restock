@@ -3,18 +3,17 @@ import styled from 'styled-components/native';
 import { Feather } from 'icons';
 
 const CounterButtonContainer = styled.TouchableOpacity`
-  align-items: center;
   background-color: ${props => (props.disabled ? 'gainsboro' : 'lightgrey')};
   border-bottom-left-radius: ${props => (props.position === 'left' ? 3 : 0)};
   border-bottom-right-radius: ${props => (props.position === 'right' ? 3 : 0)};
   border-top-left-radius: ${props => (props.position === 'left' ? 3 : 0)};
   border-top-right-radius: ${props => (props.position === 'right' ? 3 : 0)};
-  padding: 10px;
-  width: 35px;
+  justify-content: center;
 `;
 
 const CounterButtonLabel = styled(Feather)`
   color: ${props => (props.disabled ? 'darkgrey' : 'black')};
+  margin: 10px;
 `;
 
 const CounterButton = ({ disabled, icon, onPress, position }) => {
