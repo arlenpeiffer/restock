@@ -21,11 +21,11 @@ const CounterDisplayText = styled.Text`
   text-align: center;
 `;
 
-const Counter = ({ item, handleUpdateAmount }) => {
+const Counter = ({ item, handleUpdateOrder }) => {
   const [amount, setAmount] = useState(0);
 
   useEffect(() => {
-    amount && handleUpdateAmount(item, amount);
+    handleUpdateOrder(item, amount);
   }, [amount]);
 
   const increment = () => {

@@ -21,15 +21,20 @@ const AppContainer = createAppContainer(AppNavigator);
 const App = () => {
   const [order, setOrder] = useState({});
 
-  const handleUpdateAmount = (item, amount) => {
-    setOrder({
-      ...order,
-      [item]: amount
-    });
+  const handleUpdateOrder = (item, amount) => {
+    if (amount) {
+      setOrder({
+        ...order,
+        [item]: amount
+      });
+    } else {
+      const { [item]: amount, ...orderSansItem } = order;
+      setOrder(orderSansItem);
+    }
   };
 
   return (
-    <OrderContext.Provider value={{ order, handleUpdateAmount }}>
+    <OrderContext.Provider value={{ order, handleUpdateOrder }}>
       <AppContainer />
     </OrderContext.Provider>
   );

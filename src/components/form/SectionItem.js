@@ -16,12 +16,12 @@ const SectionItemContainer = styled.View`
 `;
 
 const SectionItem = ({ item }) => {
-  const { handleUpdateAmount } = useContext(OrderContext);
+  const { handleUpdateOrder } = useContext(OrderContext);
 
   return (
     <SectionItemContainer>
       <Text>{item}:</Text>
-      <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
+      <Counter item={item} handleUpdateOrder={handleUpdateOrder} />
     </SectionItemContainer>
   );
 };
