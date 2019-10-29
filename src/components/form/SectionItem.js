@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
 
 import OrderContext from 'contexts/OrderContext';
@@ -20,10 +20,8 @@ const SectionItem = ({ item }) => {
 
   return (
     <SectionItemContainer>
-      <View>
-        <Text>{item}:</Text>
-        <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
-      </View>
+      <Text>{item}:</Text>
+      <Counter item={item} handleUpdateAmount={handleUpdateAmount} />
     </SectionItemContainer>
   );
 };
