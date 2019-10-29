@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native';
 import styled from 'styled-components/native';
+import { Feather } from 'icons';
 
 import { colors } from 'constants/colors';
 import SectionItem from 'form/SectionItem';
@@ -12,11 +12,23 @@ const SectionContainer = styled.View`
 `;
 
 const SectionHeader = styled.View`
+  align-items: center;
   background-color: ${colors.MIDNIGHT_BLUE};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 25px;
+`;
+
+const SectionHeaderLabel = styled.Text`
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1.5;
+  text-transform: uppercase;
+`;
+
+const SectionHeaderIcon = styled(Feather)`
+  color: white;
 `;
 
 const Section = ({ section }) => {
@@ -26,8 +38,12 @@ const Section = ({ section }) => {
   return (
     <SectionContainer>
       <SectionHeader>
-        <Text>{name}</Text>
-        <Text onPress={() => setIsExpanded(!isExpanded)}>+</Text>
+        <SectionHeaderLabel>{name}</SectionHeaderLabel>
+        <SectionHeaderIcon
+          name="plus"
+          size={18}
+          onPress={() => setIsExpanded(!isExpanded)}
+        />
       </SectionHeader>
       {isExpanded && items.map(item => <SectionItem key={item} item={item} />)}
     </SectionContainer>
