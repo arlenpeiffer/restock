@@ -8,8 +8,10 @@ module.exports = function(api) {
           checklist: './src/components/checklist',
           common: './src/components/common',
           constants: './src/constants',
+          contexts: './src/contexts',
           data: './src/data',
           form: './src/components/form',
+          icons: '@expo/vector-icons',
           images: './assets/images',
           screens: './src/components/screens'
         }
