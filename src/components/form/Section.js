@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import styled from 'styled-components/native';
+
+import { colors } from 'constants/colors';
 import SectionItem from 'form/SectionItem';
 
 const SectionContainer = styled.View`
-  background-color: papayawhip;
-  display: flex;
-  flex-direction: column;
+  background-color: ${colors.ORANGE_WHITE};
   margin: 5px;
   width: 100%;
 `;
 
 const SectionHeader = styled.View`
-  background-color: wheat;
+  background-color: ${colors.MIDNIGHT_BLUE};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
