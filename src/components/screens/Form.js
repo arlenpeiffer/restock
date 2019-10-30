@@ -1,15 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from 'react-native';
 
-import OrderContext from 'contexts/OrderContext';
 import ScreenContainer from 'common/ScreenContainer';
 import Section from 'form/Section';
 import { inventory } from 'data/inventory';
 
 const Form = props => {
-  const { order } = useContext(OrderContext);
-  console.log('Form', order);
-
   return (
     <ScreenContainer>
       {inventory.map(section => (
