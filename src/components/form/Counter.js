@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import CounterButton from 'form/CounterButton';
 
@@ -21,13 +21,7 @@ const CounterDisplayText = styled.Text`
   text-align: center;
 `;
 
-const Counter = ({ item, handleUpdateOrder }) => {
-  const [amount, setAmount] = useState(0);
-
-  useEffect(() => {
-    handleUpdateOrder(item, amount);
-  }, [amount]);
-
+const Counter = ({ amount, setAmount }) => {
   const increment = () => {
     setAmount(amount + 1);
   };
