@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -15,13 +15,24 @@ const SectionItemContainer = styled.View`
   padding: 20px;
 `;
 
-const SectionItem = ({ item }) => {
-  const { handleUpdateOrder } = useContext(OrderContext);
+const SectionItem = ({ section, item }) => {
+  const { order, handleUpdateOrder } = useContext(OrderContext);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
+  const initialState = (order[section] && order[section][item]) || 0;
+  const [amount, setAmount] = useState(initialState);
+
+  useEffect(() => {
+    isMounted && handleUpdateOrder(section, item, amount);
+  }, [amount]);
 
   return (
     <SectionItemContainer>
       <Text>{item}:</Text>
-      <Counter item={item} handleUpdateOrder={handleUpdateOrder} />
+      <Counter amount={amount} setAmount={setAmount} />
     </SectionItemContainer>
   );
 };
