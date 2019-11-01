@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import { Text, Button } from 'react-native';
+import styled from 'styled-components/native';
 
 import OrderContext from 'contexts/OrderContext';
-import ScreenContainer from 'common/ScreenContainer';
 import ChecklistSection from 'checklist/ChecklistSection';
+
+const ScreenContainer = styled.ScrollView`
+  margin: 0 20px;
+`;
 
 const Checklist = props => {
   const { order } = useContext(OrderContext);
@@ -31,7 +35,6 @@ const Checklist = props => {
 
   return (
     <ScreenContainer>
-      <Text>Checklist Screen</Text>
       {checklist.length > 0 ? (
         checklist.map(section => (
           <ChecklistSection key={section.name} section={section} />
