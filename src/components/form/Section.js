@@ -45,7 +45,10 @@ const Section = ({ section }) => {
           onPress={() => setIsExpanded(!isExpanded)}
         />
       </SectionHeader>
-      {isExpanded && items.map(item => <SectionItem key={item} item={item} />)}
+      {isExpanded &&
+        items.map(item => (
+          <SectionItem key={item} section={name} item={item} />
+        ))}
     </SectionContainer>
   );
 };
