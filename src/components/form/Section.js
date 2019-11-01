@@ -40,7 +40,7 @@ const Section = ({ section }) => {
       <SectionHeader>
         <SectionHeaderLabel>{name}</SectionHeaderLabel>
         <SectionHeaderIcon
-          name="plus"
+          name={isExpanded ? 'chevron-down' : 'plus'}
           size={18}
           onPress={() => setIsExpanded(!isExpanded)}
         />
