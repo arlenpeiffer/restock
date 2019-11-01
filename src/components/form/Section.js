@@ -47,7 +47,7 @@ const Section = ({ section }) => {
       </SectionHeader>
       {isExpanded &&
         items.map(item => (
-          <SectionItem key={item} item={item} section={name} />
+          <SectionItem key={item} section={name} item={item} />
         ))}
     </SectionContainer>
   );

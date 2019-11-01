@@ -20,7 +20,6 @@ const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
   const [order, setOrder] = useState({});
-  console.log('order = ', order);
 
   const handleUpdateOrder = (section, item, amount) => {
     // DOES SECTION KEY EXIST? //

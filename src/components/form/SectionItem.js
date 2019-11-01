@@ -15,22 +15,18 @@ const SectionItemContainer = styled.View`
   padding: 20px;
 `;
 
-const SectionItem = ({ item, section }) => {
+const SectionItem = ({ section, item }) => {
   const { order, handleUpdateOrder } = useContext(OrderContext);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
   const initialState = (order[section] && order[section][item]) || 0;
-
   const [amount, setAmount] = useState(initialState);
-  const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    setDidMount(true);
-    // add cleanup? //
-  }, []);
-
-  useEffect(() => {
-    didMount && handleUpdateOrder(section, item, amount);
-    // add cleanup? //
+    isMounted && handleUpdateOrder(section, item, amount);
   }, [amount]);
 
   return (
