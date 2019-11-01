@@ -21,8 +21,7 @@ const Checklist = props => {
         items: Object.entries(items).map(([name, amount]) => {
           return {
             name,
-            amount,
-            isChecked: false
+            amount
           };
         })
       });
