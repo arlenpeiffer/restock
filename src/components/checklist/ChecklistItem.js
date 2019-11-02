@@ -30,7 +30,22 @@ const ChecklistItem = ({ section, item }) => {
 
   useEffect(() => setIsMounted(true), []);
 
-  const [isChecked, setIsChecked] = useState(false);
+  const setInitialValue = (order, section, item) => {
+    let initialValue = false;
+    order.some(s => {
+      if (s.name === section) {
+        s.items.some(i => {
+          if (i.name === item) {
+            initialValue = i.isChecked;
+          }
+        });
+      }
+    });
+    return initialValue;
+  };
+
+  const initialValue = setInitialValue(order, section, name);
+  const [isChecked, setIsChecked] = useState(initialValue);
 
   useEffect(() => {
     isMounted && handleUpdateOrder(section, name, amount, isChecked);

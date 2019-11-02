@@ -22,7 +22,22 @@ const SectionItem = ({ section, item }) => {
 
   useEffect(() => setIsMounted(true), []);
 
-  const [amount, setAmount] = useState(0);
+  const setInitialValue = (order, section, item) => {
+    let initialValue = 0;
+    order.some(s => {
+      if (s.name === section) {
+        s.items.some(i => {
+          if (i.name === item) {
+            initialValue = i.amount;
+          }
+        });
+      }
+    });
+    return initialValue;
+  };
+
+  const initialValue = setInitialValue(order, section, item);
+  const [amount, setAmount] = useState(initialValue);
 
   useEffect(() => {
     isMounted && handleUpdateOrder(section, item, amount);
