@@ -12,30 +12,10 @@ const ScreenContainer = styled.ScrollView`
 const Checklist = props => {
   const { order } = useContext(OrderContext);
 
-  const createChecklist = () => {
-    let checklist = [];
-
-    Object.entries(order).map(([name, items]) => {
-      checklist.push({
-        name,
-        items: Object.entries(items).map(([name, amount]) => {
-          return {
-            name,
-            amount
-          };
-        })
-      });
-    });
-
-    return checklist;
-  };
-
-  const checklist = createChecklist();
-
   return (
     <ScreenContainer>
-      {checklist.length > 0 ? (
-        checklist.map(section => (
+      {order.length > 0 ? (
+        order.map(section => (
           <ChecklistSection key={section.name} section={section} />
         ))
       ) : (

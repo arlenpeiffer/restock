@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { Feather } from 'icons';
+
+import OrderContext from 'contexts/OrderContext';
 
 const ItemContainer = styled.TouchableOpacity`
   align-items: center;
@@ -20,9 +22,19 @@ const ItemText = styled.Text`
   text-decoration-color: lightgrey;
 `;
 
-const ChecklistItem = ({ item }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const ChecklistItem = ({ section, item }) => {
+  const { order, handleUpdateOrder } = useContext(OrderContext);
   const { name, amount } = item;
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    isMounted && handleUpdateOrder(section, name, amount, isChecked);
+  }, [isChecked]);
 
   return (
     <ItemContainer onPress={() => setIsChecked(!isChecked)}>
