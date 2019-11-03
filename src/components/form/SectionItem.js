@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { colors } from 'constants/colors';
 import OrderContext from 'contexts/OrderContext';
 import Counter from 'form/Counter';
+import useInitialValue from 'hooks/useInitialValue';
 
 const SectionItemContainer = styled.View`
   align-items: center;
@@ -16,13 +17,14 @@ const SectionItemContainer = styled.View`
 `;
 
 const SectionItem = ({ section, item }) => {
-  const { order, handleUpdateOrder } = useContext(OrderContext);
+  const { handleUpdateOrder } = useContext(OrderContext);
 
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
 
-  const [amount, setAmount] = useState(0);
+  const initialValue = useInitialValue('amount', 0, section, item);
+  const [amount, setAmount] = useState(initialValue);
 
   useEffect(() => {
     isMounted && handleUpdateOrder(section, item, amount);

@@ -48,8 +48,8 @@ export const reducer = (state, action) => {
               if (item.name === action.item) {
                 return {
                   ...item,
-                  amount: action.amount || item.amount,
-                  isChecked: action.isChecked || item.isChecked
+                  amount: action.amount,
+                  isChecked: action.isChecked
                 };
               } else {
                 return item;

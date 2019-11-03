@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { Feather } from 'icons';
 
 import OrderContext from 'contexts/OrderContext';
+import useInitialValue from 'hooks/useInitialValue';
 
 const ItemContainer = styled.TouchableOpacity`
   align-items: center;
@@ -23,17 +24,17 @@ const ItemText = styled.Text`
 `;
 
 const ChecklistItem = ({ section, item }) => {
-  const { order, handleUpdateOrder } = useContext(OrderContext);
-  const { name, amount } = item;
+  const { handleUpdateOrder } = useContext(OrderContext);
 
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
 
-  const [isChecked, setIsChecked] = useState(false);
+  const initialValue = useInitialValue('isChecked', false, section, item.name);
+  const [isChecked, setIsChecked] = useState(initialValue);
 
   useEffect(() => {
-    isMounted && handleUpdateOrder(section, name, amount, isChecked);
+    isMounted && handleUpdateOrder(section, item.name, item.amount, isChecked);
   }, [isChecked]);
 
   return (
@@ -44,7 +45,7 @@ const ChecklistItem = ({ section, item }) => {
         isChecked={isChecked}
       />
       <ItemText isChecked={isChecked}>
-        {amount} {name}
+        {item.amount} {item.name}
       </ItemText>
     </ItemContainer>
   );
