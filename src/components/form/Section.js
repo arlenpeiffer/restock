@@ -11,7 +11,7 @@ const SectionContainer = styled.View`
   width: 100%;
 `;
 
-const SectionHeader = styled.View`
+const SectionHeader = styled.TouchableOpacity`
   align-items: center;
   background-color: ${colors.MIDNIGHT_BLUE};
   display: flex;
@@ -37,12 +37,14 @@ const Section = ({ section }) => {
 
   return (
     <SectionContainer>
-      <SectionHeader>
+      <SectionHeader
+        activeOpacity={1}
+        onPress={() => setIsExpanded(!isExpanded)}
+      >
         <SectionHeaderLabel>{name}</SectionHeaderLabel>
         <SectionHeaderIcon
           name={isExpanded ? 'chevron-down' : 'plus'}
           size={18}
-          onPress={() => setIsExpanded(!isExpanded)}
         />
       </SectionHeader>
       {isExpanded &&
