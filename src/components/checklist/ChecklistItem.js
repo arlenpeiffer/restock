@@ -4,6 +4,7 @@ import { Feather } from 'icons';
 
 import OrderContext from 'contexts/OrderContext';
 import useInitialValue from 'hooks/useInitialValue';
+import useIsMounted from 'hooks/useIsMounted';
 
 const ItemContainer = styled.TouchableOpacity`
   align-items: center;
@@ -26,12 +27,10 @@ const ItemText = styled.Text`
 const ChecklistItem = ({ section, item }) => {
   const { handleUpdateOrder } = useContext(OrderContext);
 
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => setIsMounted(true), []);
-
   const initialValue = useInitialValue('isChecked', false, section, item.name);
   const [isChecked, setIsChecked] = useState(initialValue);
+
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     isMounted && handleUpdateOrder(section, item.name, item.amount, isChecked);

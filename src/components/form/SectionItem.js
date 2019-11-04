@@ -6,6 +6,7 @@ import { colors } from 'constants/colors';
 import OrderContext from 'contexts/OrderContext';
 import Counter from 'form/Counter';
 import useInitialValue from 'hooks/useInitialValue';
+import useIsMounted from 'hooks/useIsMounted';
 
 const SectionItemContainer = styled.View`
   align-items: center;
@@ -19,12 +20,10 @@ const SectionItemContainer = styled.View`
 const SectionItem = ({ section, item }) => {
   const { handleUpdateOrder } = useContext(OrderContext);
 
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => setIsMounted(true), []);
-
   const initialValue = useInitialValue('amount', 0, section, item);
   const [amount, setAmount] = useState(initialValue);
+
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     isMounted && handleUpdateOrder(section, item, amount);
