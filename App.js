@@ -3,6 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import * as actions from 'actions';
+import Header from 'common/Header';
 import OrderContext from 'contexts/OrderContext';
 import reducer from 'reducers';
 import Checklist from 'screens/Checklist';
@@ -10,8 +11,20 @@ import Form from 'screens/Form';
 
 const AppNavigator = createStackNavigator(
   {
-    Form: Form,
-    Checklist: Checklist
+    Form: {
+      screen: Form,
+      navigationOptions: () => ({
+        header: Header,
+        headerLeft: null
+      })
+    },
+    Checklist: {
+      screen: Checklist,
+      navigationOptions: () => ({
+        header: Header,
+        headerLeft: null
+      })
+    }
   },
   {
     initialRouteName: 'Form'
