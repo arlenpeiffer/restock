@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from 'constants/types';
 
 export const ADD_SECTION = (section, item, amount) => ({
   type: types.ADD_SECTION,

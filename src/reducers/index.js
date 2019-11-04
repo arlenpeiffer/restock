@@ -1,6 +1,6 @@
-import * as types from '../actions/types';
+import * as types from 'constants/types';
 
-export const reducer = (state, action) => {
+export default (state, action) => {
   switch (action.type) {
     case types.ADD_SECTION:
       return [

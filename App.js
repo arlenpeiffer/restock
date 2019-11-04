@@ -2,12 +2,11 @@ import React, { useReducer } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import * as actions from 'actions';
 import OrderContext from 'contexts/OrderContext';
-import Form from 'screens/Form';
+import reducer from 'reducers';
 import Checklist from 'screens/Checklist';
-
-import * as actions from './src/actions/actions';
-import { reducer } from './src/reducers/reducer';
+import Form from 'screens/Form';
 
 const AppNavigator = createStackNavigator(
   {

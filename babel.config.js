@@ -5,6 +5,7 @@ module.exports = function(api) {
     plugins: [
       ['module-resolver', {
         alias: {
+          actions: './src/actions',
           checklist: './src/components/checklist',
           common: './src/components/common',
           constants: './src/constants',
@@ -14,6 +15,7 @@ module.exports = function(api) {
           hooks: './src/hooks',
           icons: '@expo/vector-icons',
           images: './assets/images',
+          reducers: './src/reducers',
           screens: './src/components/screens'
         }
       }]
