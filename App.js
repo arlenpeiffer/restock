@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import * as actions from 'actions';
 import OrderContext from 'contexts/OrderContext';
-import Form from 'screens/Form';
+import reducer from 'reducers';
 import Checklist from 'screens/Checklist';
+import Form from 'screens/Form';
 
 const AppNavigator = createStackNavigator(
   {
@@ -19,44 +21,36 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
-  const [order, setOrder] = useState({});
+  const [order, dispatch] = useReducer(reducer, []);
 
-  const handleUpdateOrder = (section, item, amount) => {
-    // DOES SECTION KEY EXIST? //
-    if (Object.keys(order).includes(section)) {
+  const handleUpdateOrder = (section, item, amount, isChecked) => {
+    // DOES SECTION EXIST? //
+    if (order.some(sect => sect.name === section)) {
       // YES: IS AMOUNT > 0? //
       if (amount) {
-        // YES: ADD ITEM KEY! //
-        setOrder({
-          ...order,
-          [section]: {
-            ...order[section],
-            [item]: amount
-          }
-        });
+        // YES: DOES ITEM EXIST? //
+        const items = order.find(({ name }) => name === section).items;
+        if (items.find(({ name }) => name === item)) {
+          // YES: UPDATE ITEM! //
+          dispatch(actions.UPDATE_ITEM(section, item, amount, isChecked));
+        } else {
+          // NO: ADD ITEM! //
+          dispatch(actions.ADD_ITEM(section, item, amount));
+        }
       } else {
         // NO: IS THIS THE LAST ITEM IN THE SECTION? //
-        if (Object.keys(order[section]).length === 1) {
-          // YES: REMOVE SECTION KEY! //
-          const { [section]: undefined, ...orderSansSection } = order;
-          setOrder(orderSansSection);
+        const items = order.find(({ name }) => name === section).items;
+        if (items.length === 1) {
+          // YES: REMOVE SECTION! //
+          dispatch(actions.REMOVE_SECTION(section));
         } else {
-          // NO: REMOVE ITEM KEY! //
-          const { [item]: undefined, ...sectionSansItem } = order[section];
-          setOrder({
-            ...order,
-            [section]: sectionSansItem
-          });
+          // NO: REMOVE ITEM! //
+          dispatch(actions.REMOVE_ITEM(section, item));
         }
       }
     } else {
       // NO: ADD SECTION KEY! //
-      setOrder({
-        ...order,
-        [section]: {
-          [item]: amount
-        }
-      });
+      dispatch(actions.ADD_SECTION(section, item, amount));
     }
   };
 

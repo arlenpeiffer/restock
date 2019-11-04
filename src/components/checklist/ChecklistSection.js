@@ -37,7 +37,7 @@ const ChecklistSection = ({ section }) => {
         <SectionLabelBar />
       </SectionLabel>
       {items.map(item => (
-        <ChecklistItem key={item.name} item={item} />
+        <ChecklistItem key={item.name} section={name} item={item} />
       ))}
     </SectionContainer>
   );
