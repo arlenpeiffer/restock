@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import * as actions from 'actions';
 import OrderContext from 'contexts/OrderContext';
-import Form from 'screens/Form';
+import reducer from 'reducers';
 import Checklist from 'screens/Checklist';
+import Form from 'screens/Form';
 
 const AppNavigator = createStackNavigator(
   {
@@ -19,17 +21,36 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
-  const [order, setOrder] = useState({});
+  const [order, dispatch] = useReducer(reducer, []);
 
-  const handleUpdateOrder = (item, amount) => {
-    if (amount) {
-      setOrder({
-        ...order,
-        [item]: amount
-      });
+  const handleUpdateOrder = (section, item, amount, isChecked) => {
+    // DOES SECTION EXIST? //
+    if (order.some(sect => sect.name === section)) {
+      // YES: IS AMOUNT > 0? //
+      if (amount) {
+        // YES: DOES ITEM EXIST? //
+        const items = order.find(({ name }) => name === section).items;
+        if (items.find(({ name }) => name === item)) {
+          // YES: UPDATE ITEM! //
+          dispatch(actions.UPDATE_ITEM(section, item, amount, isChecked));
+        } else {
+          // NO: ADD ITEM! //
+          dispatch(actions.ADD_ITEM(section, item, amount));
+        }
+      } else {
+        // NO: IS THIS THE LAST ITEM IN THE SECTION? //
+        const items = order.find(({ name }) => name === section).items;
+        if (items.length === 1) {
+          // YES: REMOVE SECTION! //
+          dispatch(actions.REMOVE_SECTION(section));
+        } else {
+          // NO: REMOVE ITEM! //
+          dispatch(actions.REMOVE_ITEM(section, item));
+        }
+      }
     } else {
-      const { [item]: amount, ...orderSansItem } = order;
-      setOrder(orderSansItem);
+      // NO: ADD SECTION KEY! //
+      dispatch(actions.ADD_SECTION(section, item, amount));
     }
   };
 
