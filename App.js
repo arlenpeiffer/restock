@@ -22,7 +22,6 @@ const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
   const [order, dispatch] = useReducer(reducer, []);
-  console.log('order = ', order);
 
   const handleUpdateOrder = (section, item, amount, isChecked) => {
     // DOES SECTION EXIST? //
