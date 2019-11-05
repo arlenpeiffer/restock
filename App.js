@@ -11,22 +11,14 @@ import Form from 'screens/Form';
 
 const AppNavigator = createStackNavigator(
   {
-    Form: {
-      screen: Form,
-      navigationOptions: () => ({
-        header: Header,
-        headerLeft: null
-      })
-    },
-    Checklist: {
-      screen: Checklist,
-      navigationOptions: () => ({
-        header: Header,
-        headerLeft: null
-      })
-    }
+    Form: Form,
+    Checklist: Checklist
   },
   {
+    defaultNavigationOptions: {
+      header: Header,
+      headerLeft: null
+    },
     initialRouteName: 'Form'
   }
 );
