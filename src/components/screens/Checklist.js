@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, Button } from 'react-native';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
 
 import OrderContext from 'contexts/OrderContext';
@@ -9,7 +9,7 @@ const ScreenContainer = styled.ScrollView`
   margin: 0 20px;
 `;
 
-const Checklist = props => {
+const Checklist = () => {
   const { order } = useContext(OrderContext);
 
   return (
@@ -21,10 +21,6 @@ const Checklist = props => {
       ) : (
         <Text>You're all stocked up!</Text>
       )}
-      <Button
-        title="Go to Form Screen"
-        onPress={() => props.navigation.navigate('Form')}
-      />
     </ScreenContainer>
   );
 };
