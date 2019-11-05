@@ -18,16 +18,22 @@ const Logo = styled.Image`
 
 const NavigationContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  margin-top: -15px;
 `;
 
-const NavigationItem = styled.Text`
+const NavigationItem = styled.TouchableOpacity`
+  border-bottom-color: ${props =>
+    props.isSelected ? `${colors.SAFFRON}` : 'white'};
+  border-bottom-width: 5px;
+  margin: 0 25px;
+  padding-bottom: 5px;
+`;
+
+const NavigationItemLabel = styled.Text`
   color: ${colors.MIDNIGHT_BLUE};
   font-size: 16;
   font-weight: 700;
   letter-spacing: 1.5;
-  margin-top: -15px;
-  padding: 0 50px;
   text-transform: uppercase;
 `;
 
@@ -36,11 +42,19 @@ const Header = props => {
     <HeaderContainer>
       <Logo source={logo} />
       <NavigationContainer>
-        <NavigationItem onPress={() => props.navigation.navigate('Form')}>
-          Form
+        <NavigationItem
+          activeOpacity={1}
+          isSelected={props.navigation.state.index === 1}
+          onPress={() => props.navigation.navigate('Checklist')}
+        >
+          <NavigationItemLabel>Checklist</NavigationItemLabel>
         </NavigationItem>
-        <NavigationItem onPress={() => props.navigation.navigate('Checklist')}>
-          Checklist
+        <NavigationItem
+          activeOpacity={1}
+          isSelected={props.navigation.state.index === 0}
+          onPress={() => props.navigation.navigate('Form')}
+        >
+          <NavigationItemLabel>Order Form</NavigationItemLabel>
         </NavigationItem>
       </NavigationContainer>
     </HeaderContainer>
