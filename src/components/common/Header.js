@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import styled from 'styled-components/native';
 
 import { colors } from 'constants/colors';
@@ -44,6 +45,7 @@ const SafeAreaView = styled.SafeAreaView`
 const Header = props => {
   return (
     <SafeAreaView>
+      <StatusBar barStyle="light-content" />
       <HeaderContainer>
         <Logo source={headerLogo} />
         <NavigationContainer>
