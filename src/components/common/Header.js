@@ -8,17 +8,17 @@ const HeaderContainer = styled.View`
   align-items: center;
   background-color: ${colors.EGYPTIAN_BLUE};
   justify-content: center;
+  padding: 20px 0;
 `;
 
 const Logo = styled.Image`
   height: 50px;
-  margin-top: 30px;
+  margin-bottom: 15px;
   resize-mode: contain;
 `;
 
 const NavigationContainer = styled.View`
   flex-direction: row;
-  margin: 20px 0;
 `;
 
 const NavigationItem = styled.TouchableOpacity`
@@ -37,27 +37,33 @@ const NavigationItemLabel = styled.Text`
   text-transform: uppercase;
 `;
 
+const SafeAreaView = styled.SafeAreaView`
+  background-color: ${colors.MIDNIGHT_BLUE};
+`;
+
 const Header = props => {
   return (
-    <HeaderContainer>
-      <Logo source={headerLogo} />
-      <NavigationContainer>
-        <NavigationItem
-          activeOpacity={1}
-          isSelected={props.navigation.state.index === 1}
-          onPress={() => props.navigation.navigate('Checklist')}
-        >
-          <NavigationItemLabel>Checklist</NavigationItemLabel>
-        </NavigationItem>
-        <NavigationItem
-          activeOpacity={1}
-          isSelected={props.navigation.state.index === 0}
-          onPress={() => props.navigation.navigate('Form')}
-        >
-          <NavigationItemLabel>Order Form</NavigationItemLabel>
-        </NavigationItem>
-      </NavigationContainer>
-    </HeaderContainer>
+    <SafeAreaView>
+      <HeaderContainer>
+        <Logo source={headerLogo} />
+        <NavigationContainer>
+          <NavigationItem
+            activeOpacity={1}
+            isSelected={props.navigation.state.index === 1}
+            onPress={() => props.navigation.navigate('Checklist')}
+          >
+            <NavigationItemLabel>Checklist</NavigationItemLabel>
+          </NavigationItem>
+          <NavigationItem
+            activeOpacity={1}
+            isSelected={props.navigation.state.index === 0}
+            onPress={() => props.navigation.navigate('Form')}
+          >
+            <NavigationItemLabel>Order Form</NavigationItemLabel>
+          </NavigationItem>
+        </NavigationContainer>
+      </HeaderContainer>
+    </SafeAreaView>
   );
 };
 
