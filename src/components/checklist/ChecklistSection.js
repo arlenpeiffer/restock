@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-import { colors } from 'constants/colors';
 import ChecklistItem from 'checklist/ChecklistItem';
+import { colors } from 'constants/colors';
 
 const SectionContainer = styled.View`
-  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-horizontal: 10px;
 `;
 
 const SectionLabel = styled.View`
@@ -15,7 +16,7 @@ const SectionLabel = styled.View`
 
 const SectionLabelBar = styled.View`
   background-color: ${colors.ORANGE_WHITE};
-  flex-grow: 1;
+  flex: 1;
   height: 1px;
 `;
 

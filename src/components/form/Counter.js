@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
+
 import CounterButton from 'form/CounterButton';
 
 const CounterContainer = styled.View`
   border: 0.5px solid darkgrey;
   border-radius: 3;
   flex-direction: row;
-  margin-top: 10px;
 `;
 
 const CounterDisplay = styled.View`

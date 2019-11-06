@@ -7,8 +7,9 @@ import SectionItem from 'form/SectionItem';
 
 const SectionContainer = styled.View`
   background-color: ${colors.ORANGE_WHITE};
-  margin: 5px;
-  width: 100%;
+  flex: 1;
+  margin-bottom: 10px;
+  padding-bottom: ${props => (props.isExpanded ? '15px' : '0px')};
 `;
 
 const SectionHeader = styled.TouchableOpacity`
@@ -31,12 +32,16 @@ const SectionHeaderIcon = styled(Feather)`
   color: white;
 `;
 
+const SectionItemsContainer = styled.View`
+  align-items: center;
+`;
+
 const Section = ({ section }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { name, items } = section;
 
   return (
-    <SectionContainer>
+    <SectionContainer isExpanded={isExpanded}>
       <SectionHeader
         activeOpacity={1}
         onPress={() => setIsExpanded(!isExpanded)}
@@ -47,10 +52,12 @@ const Section = ({ section }) => {
           size={18}
         />
       </SectionHeader>
-      {isExpanded &&
-        items.map(item => (
-          <SectionItem key={item} section={name} item={item} />
-        ))}
+      <SectionItemsContainer>
+        {isExpanded &&
+          items.map(item => (
+            <SectionItem key={item} section={name} item={item} />
+          ))}
+      </SectionItemsContainer>
     </SectionContainer>
   );
 };

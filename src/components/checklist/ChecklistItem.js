@@ -13,7 +13,7 @@ const ItemContainer = styled.TouchableOpacity`
 `;
 
 const ItemIcon = styled(Feather)`
-  color: ${props => (props.isChecked ? 'green' : 'black')}
+  color: ${props => (props.isChecked ? 'green' : 'black')};
   margin: 0 10px;
 `;
 

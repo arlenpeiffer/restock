@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text } from 'react-native';
 import styled from 'styled-components/native';
 
 import { colors } from 'constants/colors';
@@ -10,11 +9,24 @@ import useIsMounted from 'hooks/useIsMounted';
 
 const SectionItemContainer = styled.View`
   align-items: center;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  width: 154px;
+`;
+
+const SectionItemDivider = styled.View`
   background-color: ${colors.SAFFRON};
-  border: 1px solid ${colors.EGYPTIAN_BLUE};
-  border-radius: 5;
-  margin: 20px;
-  padding: 20px;
+  height: 5px;
+  margin-bottom: 10px;
+  margin-top: 6.5px;
+  width: 45px;
+`;
+
+const SectionItemLabel = styled.Text`
+  font-weight: 800;
+  padding-horizontal: 5px;
+  text-align: center;
+  text-transform: uppercase;
 `;
 
 const SectionItem = ({ section, item }) => {
@@ -31,7 +43,8 @@ const SectionItem = ({ section, item }) => {
 
   return (
     <SectionItemContainer>
-      <Text>{item}:</Text>
+      <SectionItemLabel>{item}</SectionItemLabel>
+      <SectionItemDivider />
       <Counter amount={amount} setAmount={setAmount} />
     </SectionItemContainer>
   );
