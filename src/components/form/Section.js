@@ -5,25 +5,18 @@ import { Feather } from 'icons';
 import { colors } from 'constants/colors';
 import SectionItem from 'form/SectionItem';
 
-const SectionContainer = styled.View`
-  margin-bottom: 10px;
+const ExpandedView = styled.View`
+  background-color: ${colors.ORANGE_WHITE};
 `;
 
-const SectionFooter = styled.TouchableOpacity`
+const Footer = styled.TouchableOpacity`
   align-items: center;
   background-color: ${colors.EGYPTIAN_BLUE};
   margin-top: 15px;
   padding: 15px;
 `;
 
-const SectionFooterLabel = styled.Text`
-  color: white;
-  font-weight: 700;
-  letter-spacing: 1.5;
-  text-transform: uppercase;
-`;
-
-const SectionHeader = styled.TouchableOpacity`
+const Header = styled.TouchableOpacity`
   align-items: center;
   background-color: ${colors.MIDNIGHT_BLUE};
   flex-direction: row;
@@ -31,23 +24,23 @@ const SectionHeader = styled.TouchableOpacity`
   padding: 25px;
 `;
 
-const SectionHeaderLabel = styled.Text`
+const Icon = styled(Feather)`
+  color: white;
+`;
+
+const ItemsContainer = styled.View`
+  align-items: center;
+`;
+
+const Label = styled.Text`
   color: white;
   font-weight: 700;
   letter-spacing: 1.5;
   text-transform: uppercase;
 `;
 
-const SectionHeaderIcon = styled(Feather)`
-  color: white;
-`;
-
-const SectionItemsContainer = styled.View`
-  align-items: center;
-`;
-
-const ExpandedView = styled.View`
-  background-color: ${colors.ORANGE_WHITE};
+const SectionContainer = styled.View`
+  margin-bottom: 10px;
 `;
 
 const Section = ({ section }) => {
@@ -56,29 +49,20 @@ const Section = ({ section }) => {
 
   return (
     <SectionContainer>
-      <SectionHeader
-        activeOpacity={1}
-        onPress={() => setIsExpanded(!isExpanded)}
-      >
-        <SectionHeaderLabel>{name}</SectionHeaderLabel>
-        <SectionHeaderIcon
-          name={isExpanded ? 'chevron-down' : 'plus'}
-          size={18}
-        />
-      </SectionHeader>
+      <Header activeOpacity={1} onPress={() => setIsExpanded(!isExpanded)}>
+        <Label>{name}</Label>
+        <Icon name={isExpanded ? 'chevron-down' : 'plus'} size={18} />
+      </Header>
       {isExpanded && (
         <ExpandedView>
-          <SectionItemsContainer>
+          <ItemsContainer>
             {items.map(item => (
               <SectionItem key={item} section={name} item={item} />
             ))}
-          </SectionItemsContainer>
-          <SectionFooter
-            activeOpacity={1}
-            onPress={() => setIsExpanded(!isExpanded)}
-          >
-            <SectionFooterLabel>Close</SectionFooterLabel>
-          </SectionFooter>
+          </ItemsContainer>
+          <Footer activeOpacity={1} onPress={() => setIsExpanded(!isExpanded)}>
+            <Label>Close</Label>
+          </Footer>
         </ExpandedView>
       )}
     </SectionContainer>
