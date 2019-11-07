@@ -6,25 +6,25 @@ import OrderContext from 'contexts/OrderContext';
 import useInitialValue from 'hooks/useInitialValue';
 import useIsMounted from 'hooks/useIsMounted';
 
+const Icon = styled(Feather)`
+  color: ${props => (props.isChecked ? 'green' : 'black')};
+  margin: 0 10px;
+`;
+
 const ItemContainer = styled.TouchableOpacity`
   align-items: center;
   flex-direction: row;
   margin-top: 7.5px;
 `;
 
-const ItemIcon = styled(Feather)`
-  color: ${props => (props.isChecked ? 'green' : 'black')}
-  margin: 0 10px;
-`;
-
-const ItemText = styled.Text`
+const Text = styled.Text`
   color: ${props => (props.isChecked ? 'lightgrey' : 'black')};
   font-size: 18;
   text-decoration: ${props => (props.isChecked ? 'line-through' : 'none')};
   text-decoration-color: lightgrey;
 `;
 
-const ChecklistItem = ({ section, item }) => {
+const Item = ({ section, item }) => {
   const { handleUpdateOrder } = useContext(OrderContext);
 
   const initialValue = useInitialValue('isChecked', false, section, item.name);
@@ -38,16 +38,16 @@ const ChecklistItem = ({ section, item }) => {
 
   return (
     <ItemContainer onPress={() => setIsChecked(!isChecked)}>
-      <ItemIcon
+      <Icon
         name={isChecked ? 'check' : 'square'}
         size={18}
         isChecked={isChecked}
       />
-      <ItemText isChecked={isChecked}>
+      <Text isChecked={isChecked}>
         {item.amount} {item.name}
-      </ItemText>
+      </Text>
     </ItemContainer>
   );
 };
 
-export default ChecklistItem;
+export default Item;

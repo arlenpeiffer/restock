@@ -1,13 +1,8 @@
 import styled from 'styled-components/native';
 
-const ScreenContainer = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center'
-  }
-}))`
-  margin: 0 10px;
+const ScreenContainer = styled.View`
+  margin-horizontal: 10px;
+  margin-top: 10px;
 `;
 
 export default ScreenContainer;
