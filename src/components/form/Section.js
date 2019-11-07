@@ -9,7 +9,22 @@ const SectionContainer = styled.View`
   background-color: ${colors.ORANGE_WHITE};
   flex: 1;
   margin-bottom: 10px;
-  padding-bottom: ${props => (props.isExpanded ? '15px' : '0px')};
+`;
+
+const SectionFooter = styled.TouchableOpacity`
+  background-color: ${colors.EGYPTIAN_BLUE};
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+  padding: 15px;
+  width: 100%;
+`;
+
+const SectionFooterLabel = styled.Text`
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1.5;
+  text-transform: uppercase;
 `;
 
 const SectionHeader = styled.TouchableOpacity`
@@ -41,7 +56,7 @@ const Section = ({ section }) => {
   const { name, items } = section;
 
   return (
-    <SectionContainer isExpanded={isExpanded}>
+    <SectionContainer>
       <SectionHeader
         activeOpacity={1}
         onPress={() => setIsExpanded(!isExpanded)}
@@ -52,12 +67,19 @@ const Section = ({ section }) => {
           size={18}
         />
       </SectionHeader>
-      <SectionItemsContainer>
-        {isExpanded &&
-          items.map(item => (
+      {isExpanded && (
+        <SectionItemsContainer>
+          {items.map(item => (
             <SectionItem key={item} section={name} item={item} />
           ))}
-      </SectionItemsContainer>
+          <SectionFooter
+            activeOpacity={1}
+            onPress={() => setIsExpanded(!isExpanded)}
+          >
+            <SectionFooterLabel>Close</SectionFooterLabel>
+          </SectionFooter>
+        </SectionItemsContainer>
+      )}
     </SectionContainer>
   );
 };
