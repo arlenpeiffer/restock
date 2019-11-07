@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
 import CounterButton from 'form/CounterButton';
 
 const CounterContainer = styled.View`
@@ -9,13 +8,13 @@ const CounterContainer = styled.View`
   flex-direction: row;
 `;
 
-const CounterDisplay = styled.View`
+const Display = styled.View`
   background-color: white;
   justify-content: center;
   width: 75px;
 `;
 
-const CounterDisplayText = styled.Text`
+const DisplayText = styled.Text`
   font-size: 18;
   font-weight: 500;
   text-align: center;
@@ -38,9 +37,9 @@ const Counter = ({ amount, setAmount }) => {
         disabled={!amount}
         onPress={decrement}
       />
-      <CounterDisplay>
-        <CounterDisplayText>{amount}</CounterDisplayText>
-      </CounterDisplay>
+      <Display>
+        <DisplayText>{amount}</DisplayText>
+      </Display>
       <CounterButton icon="plus" position="right" onPress={increment} />
     </CounterContainer>
   );

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Feather } from 'icons';
 
 import { colors } from 'constants/colors';
-import SectionItem from 'form/SectionItem';
+import Item from 'form/Item';
 
 const ExpandedView = styled.View`
   background-color: ${colors.ORANGE_WHITE};
@@ -57,7 +57,7 @@ const Section = ({ section }) => {
         <ExpandedView>
           <ItemsContainer>
             {items.map(item => (
-              <SectionItem key={item} section={name} item={item} />
+              <Item key={item} section={name} item={item} />
             ))}
           </ItemsContainer>
           <Footer activeOpacity={1} onPress={() => setIsExpanded(!isExpanded)}>

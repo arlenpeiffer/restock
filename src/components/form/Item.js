@@ -7,14 +7,7 @@ import Counter from 'form/Counter';
 import useInitialValue from 'hooks/useInitialValue';
 import useIsMounted from 'hooks/useIsMounted';
 
-const SectionItemContainer = styled.View`
-  align-items: center;
-  margin-bottom: 10px;
-  margin-top: 15px;
-  width: 154px;
-`;
-
-const SectionItemDivider = styled.View`
+const Divider = styled.View`
   background-color: ${colors.SAFFRON};
   height: 5px;
   margin-bottom: 10px;
@@ -22,14 +15,21 @@ const SectionItemDivider = styled.View`
   width: 45px;
 `;
 
-const SectionItemLabel = styled.Text`
+const ItemContainer = styled.View`
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  width: 154px;
+`;
+
+const Label = styled.Text`
   font-weight: 800;
   padding-horizontal: 5px;
   text-align: center;
   text-transform: uppercase;
 `;
 
-const SectionItem = ({ section, item }) => {
+const Item = ({ section, item }) => {
   const { handleUpdateOrder } = useContext(OrderContext);
 
   const initialValue = useInitialValue('amount', 0, section, item);
@@ -42,12 +42,12 @@ const SectionItem = ({ section, item }) => {
   }, [amount]);
 
   return (
-    <SectionItemContainer>
-      <SectionItemLabel>{item}</SectionItemLabel>
-      <SectionItemDivider />
+    <ItemContainer>
+      <Label>{item}</Label>
+      <Divider />
       <Counter amount={amount} setAmount={setAmount} />
-    </SectionItemContainer>
+    </ItemContainer>
   );
 };
 
-export default SectionItem;
+export default Item;
