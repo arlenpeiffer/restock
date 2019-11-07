@@ -11,7 +11,7 @@ const ExpandedView = styled.View`
 
 const Footer = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${colors.EGYPTIAN_BLUE};
+  background-color: ${colors.SAFFRON};
   margin-top: 15px;
   padding: 15px;
 `;
@@ -25,7 +25,7 @@ const Header = styled.TouchableOpacity`
 `;
 
 const Icon = styled(Feather)`
-  color: white;
+  color: ${props => props.color || 'white'};
 `;
 
 const ItemsContainer = styled.View`
@@ -33,8 +33,8 @@ const ItemsContainer = styled.View`
 `;
 
 const Label = styled.Text`
-  color: white;
-  font-weight: 700;
+  color: ${props => props.color || 'white'};
+  font-weight: ${props => props.fontWeight || 700};
   letter-spacing: 1.5;
   text-transform: uppercase;
 `;
@@ -61,7 +61,9 @@ const Section = ({ section }) => {
             ))}
           </ItemsContainer>
           <Footer activeOpacity={1} onPress={() => setIsExpanded(!isExpanded)}>
-            <Label>Close</Label>
+            <Label color={colors.MIDNIGHT_BLUE} fontWeight={800}>
+              Close
+            </Label>
           </Footer>
         </ExpandedView>
       )}
