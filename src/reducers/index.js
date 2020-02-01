@@ -1,4 +1,5 @@
 import * as types from 'constants/types';
+import sectionReducer from 'reducers/sectionReducer';
 
 export default (state, action) => {
   switch (action.type) {
@@ -10,7 +11,7 @@ export default (state, action) => {
           items: [
             {
               name: action.item,
-              amount: action.amount,
+              amount: 1,
               isChecked: false
             }
           ]
@@ -23,20 +24,9 @@ export default (state, action) => {
     case types.ADD_ITEM:
       return state.map(section => {
         if (section.name === action.section) {
-          return {
-            ...section,
-            items: [
-              ...section.items,
-              {
-                name: action.item,
-                amount: action.amount,
-                isChecked: false
-              }
-            ]
-          };
-        } else {
-          return section;
+          return sectionReducer(section, action);
         }
+        return section;
       });
 
     case types.UPDATE_ITEM:
@@ -48,8 +38,7 @@ export default (state, action) => {
               if (item.name === action.item) {
                 return {
                   ...item,
-                  amount: action.amount,
-                  isChecked: action.isChecked
+                  amount: action.amount
                 };
               } else {
                 return item;
@@ -61,16 +50,28 @@ export default (state, action) => {
         }
       });
 
+    case types.UPDATE_ITEM_AMOUNT:
+      return state.map(section => {
+        if (section.name === action.section) {
+          return sectionReducer(section, action);
+        }
+        return section;
+      });
+
+    case types.UPDATE_ITEM_IS_CHECKED:
+      return state.map(section => {
+        if (section.name === action.section) {
+          return sectionReducer(section, action);
+        }
+        return section;
+      });
+
     case types.REMOVE_ITEM:
       return state.map(section => {
         if (section.name === action.section) {
-          return {
-            ...section,
-            items: section.items.filter(item => item.name !== action.item)
-          };
-        } else {
-          return section;
+          return sectionReducer(section, action);
         }
+        return section;
       });
 
     default:
