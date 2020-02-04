@@ -26,41 +26,10 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
-  const [order, dispatch] = useReducer(reducer, []);
-
-  const handleUpdateOrder = (section, item, amount, isChecked) => {
-    // DOES SECTION EXIST? //
-    if (order.some(sect => sect.name === section)) {
-      // YES: IS AMOUNT > 0? //
-      if (amount) {
-        // YES: DOES ITEM EXIST? //
-        const items = order.find(({ name }) => name === section).items;
-        if (items.find(({ name }) => name === item)) {
-          // YES: UPDATE ITEM! //
-          dispatch(actions.UPDATE_ITEM(section, item, amount, isChecked));
-        } else {
-          // NO: ADD ITEM! //
-          dispatch(actions.ADD_ITEM(section, item, amount));
-        }
-      } else {
-        // NO: IS THIS THE LAST ITEM IN THE SECTION? //
-        const items = order.find(({ name }) => name === section).items;
-        if (items.length === 1) {
-          // YES: REMOVE SECTION! //
-          dispatch(actions.REMOVE_SECTION(section));
-        } else {
-          // NO: REMOVE ITEM! //
-          dispatch(actions.REMOVE_ITEM(section, item));
-        }
-      }
-    } else {
-      // NO: ADD SECTION KEY! //
-      dispatch(actions.ADD_SECTION(section, item, amount));
-    }
-  };
+  const [order, dispatch] = useReducer(reducer, testInitialState);
 
   return (
-    <OrderContext.Provider value={{ order, handleUpdateOrder }}>
+    <OrderContext.Provider value={{ order, dispatch }}>
       <AppContainer />
     </OrderContext.Provider>
   );

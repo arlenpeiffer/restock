@@ -1,34 +1,19 @@
 import * as types from 'constants/types';
 
-export const ADD_SECTION = (section, item, amount) => ({
-  type: types.ADD_SECTION,
+export const DECREMENT_AMOUNT = (section, item) => ({
+  type: types.DECREMENT_AMOUNT,
   section,
-  item,
-  amount
+  item
 });
 
-export const REMOVE_SECTION = section => ({
-  type: types.REMOVE_SECTION,
-  section
-});
-
-export const ADD_ITEM = (section, item, amount) => ({
-  type: types.ADD_ITEM,
+export const INCREMENT_AMOUNT = (section, item) => ({
+  type: types.INCREMENT_AMOUNT,
   section,
-  item,
-  amount
+  item
 });
 
-export const UPDATE_ITEM = (section, item, amount, isChecked) => ({
-  type: types.UPDATE_ITEM,
-  section,
-  item,
-  amount,
-  isChecked
-});
-
-export const REMOVE_ITEM = (section, item) => ({
-  type: types.REMOVE_ITEM,
+export const TOGGLE_IS_CHECKED = (section, item) => ({
+  type: types.TOGGLE_IS_CHECKED,
   section,
   item
 });

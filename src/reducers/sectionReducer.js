@@ -3,25 +3,13 @@ import itemsReducer from 'reducers/itemsReducer';
 
 export default (state, action) => {
   switch (action.type) {
-    case types.ADD_ITEM:
+    case types.INCREMENT_AMOUNT:
       return {
         name: state.name,
         items: itemsReducer(state.items, action)
       };
 
-    case types.UPDATE_ITEM_AMOUNT:
-      return {
-        name: state.name,
-        items: itemsReducer(state.items, action)
-      };
-
-    case types.UPDATE_ITEM_IS_CHECKED:
-      return {
-        name: state.name,
-        items: itemsReducer(state.items, action)
-      };
-
-    case types.REMOVE_ITEM:
+    case types.TOGGLE_IS_CHECKED:
       return {
         name: state.name,
         items: itemsReducer(state.items, action)

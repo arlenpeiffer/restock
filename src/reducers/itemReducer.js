@@ -2,20 +2,13 @@ import * as types from 'constants/types';
 
 export default (state, action) => {
   switch (action.type) {
-    case types.ADD_ITEM:
-      return {
-        amount: 1,
-        isChecked: false,
-        name: action.item
-      };
-
-    case types.UPDATE_ITEM_AMOUNT:
+    case types.INCREMENT_AMOUNT:
       return {
         ...state,
-        amount: action.amount
+        amount: state.amount + 1
       };
 
-    case types.UPDATE_ITEM_IS_CHECKED:
+    case types.TOGGLE_IS_CHECKED:
       return {
         ...state,
         isChecked: !state.isChecked

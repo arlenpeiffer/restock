@@ -5,6 +5,7 @@ import { Feather } from 'icons';
 import OrderContext from 'contexts/OrderContext';
 import useInitialValue from 'hooks/useInitialValue';
 import useIsMounted from 'hooks/useIsMounted';
+import { TOGGLE_IS_CHECKED } from 'actions';
 
 const Icon = styled(Feather)`
   color: ${props => (props.isChecked ? 'green' : 'black')};
@@ -25,7 +26,7 @@ const Text = styled.Text`
 `;
 
 const Item = ({ section, item }) => {
-  const { handleUpdateOrder } = useContext(OrderContext);
+  const { dispatch } = useContext(OrderContext);
 
   const initialValue = useInitialValue('isChecked', false, section, item.name);
   const [isChecked, setIsChecked] = useState(initialValue);
@@ -33,7 +34,7 @@ const Item = ({ section, item }) => {
   const isMounted = useIsMounted();
 
   useEffect(() => {
-    isMounted && handleUpdateOrder(section, item.name, item.amount, isChecked);
+    isMounted && dispatch(TOGGLE_IS_CHECKED(section, item.name));
   }, [isChecked]);
 
   return (

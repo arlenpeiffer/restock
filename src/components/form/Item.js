@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 
+import * as actions from 'actions';
 import { colors } from 'constants/colors';
 import OrderContext from 'contexts/OrderContext';
 import Counter from 'form/Counter';
@@ -30,22 +31,34 @@ const Label = styled.Text`
 `;
 
 const Item = ({ section, item }) => {
-  const { handleUpdateOrder } = useContext(OrderContext);
+  const { order, dispatch } = useContext(OrderContext);
 
-  const initialValue = useInitialValue('amount', 0, section, item);
-  const [amount, setAmount] = useState(initialValue);
+  // const initialValue = useInitialValue('amount', 0, section, item);
+  // const [amount, setAmount] = useState(initialValue());
 
-  const isMounted = useIsMounted();
+  // const isMounted = useIsMounted();
 
-  useEffect(() => {
-    isMounted && handleUpdateOrder(section, item, amount);
-  }, [amount]);
+  // useEffect(() => {
+  //   isMounted && dispatch(actions.INCREMENT_AMOUNT(section, item));
+  // }, [amount]);
+
+  const initialValue = () => {
+    const sectionExists = order.find(({ name }) => name === section);
+    const itemExists =
+      sectionExists && sectionExists.items.find(({ name }) => name === item);
+    return itemExists ? itemExists.amount : 0;
+  };
+
+  const amount = initialValue();
 
   return (
     <ItemContainer>
       <Label>{item}</Label>
       <Divider />
-      <Counter amount={amount} setAmount={setAmount} />
+      <Counter
+        amount={amount}
+        increment={() => dispatch(actions.INCREMENT_AMOUNT(section, item))}
+      />
     </ItemContainer>
   );
 };
