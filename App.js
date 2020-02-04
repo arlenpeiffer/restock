@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import * as actions from 'actions';
 import Header from 'common/Header';
 import OrderContext from 'contexts/OrderContext';
 import reducer from 'reducers';
