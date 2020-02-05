@@ -5,7 +5,8 @@ export default (state, action) => {
     case types.INCREMENT_AMOUNT:
       return {
         ...state,
-        amount: state.amount + 1
+        amount: state.amount + 1,
+        isChecked: false
       };
 
     case types.TOGGLE_IS_CHECKED:

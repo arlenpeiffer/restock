@@ -1,9 +1,126 @@
 import * as actions from 'actions';
 import reducer from 'reducers';
 
-// it('should initialize order state as empty array', () => {
-//   expect(reducer()).toBe([]);
-// });
+describe('INCREMENT_AMOUNT', () => {
+  const state = [
+    {
+      items: [
+        {
+          amount: 1,
+          isChecked: false,
+          name: 'Original'
+        }
+      ],
+      name: 'Draft Latte Cans'
+    },
+    {
+      items: [
+        {
+          amount: 1,
+          isChecked: true,
+          name: 'Corsica'
+        }
+      ],
+      name: 'Retail Coffees'
+    }
+  ];
+
+  describe('when section exists..', () => {
+    const action = actions.INCREMENT_AMOUNT('Draft Latte Cans', 'Triple');
+    const actual = reducer(state, action);
+
+    test('section should not be added to order', () => {
+      expect(actual).toHaveLength(2);
+    });
+
+    test('each section should have a name property', () => {
+      state.map(section => {
+        expect(section).toHaveProperty('name');
+      });
+    });
+
+    test('each section should have an items property', () => {
+      state.map(section => {
+        expect(section).toHaveProperty('items');
+      });
+    });
+
+    describe('but item does not exist', () => {
+      const action = actions.INCREMENT_AMOUNT('Draft Latte Cans', 'Triple');
+      const actual = reducer(state, action);
+
+      test('item should be added to section', () => {
+        expect(actual[0].items).toHaveLength(2);
+      });
+
+      test('item amount should be 1', () => {
+        expect(actual[0].items[1]).toHaveProperty('amount', 1);
+      });
+
+      test('item isChecked state should be false', () => {
+        expect(actual[0].items[1]).toHaveProperty('isChecked', false);
+      });
+
+      test('item name should match value of action.item', () => {
+        expect(actual[0].items[1]).toHaveProperty('name', action.item);
+      });
+    });
+
+    describe('and item exists', () => {
+      const action = actions.INCREMENT_AMOUNT('Retail Coffees', 'Corsica');
+      const actual = reducer(state, action);
+
+      test('item should not be added to section', () => {
+        expect(actual[1].items).toHaveLength(1);
+      });
+
+      test('item amount should increment by 1', () => {
+        expect(actual[1].items[0].amount).toBe(2);
+      });
+
+      test('item isChecked should reset to false', () => {
+        expect(actual[1].items[0].isChecked).toBe(false);
+      });
+    });
+  });
+
+  describe('when section does not exist', () => {
+    const action = actions.INCREMENT_AMOUNT('Retail Teas', 'Genmaicha');
+    const actual = reducer(state, action);
+
+    test('section should be added to order', () => {
+      expect(actual).toHaveLength(3);
+    });
+
+    test('each section should have a name property', () => {
+      state.map(section => {
+        expect(section).toHaveProperty('name');
+      });
+    });
+
+    test('each section should have an items property', () => {
+      state.map(section => {
+        expect(section).toHaveProperty('items');
+      });
+    });
+
+    test('item should be added to section', () => {
+      expect(actual[2].items).toHaveLength(1);
+    });
+
+    test('item amount should be 1', () => {
+      expect(actual[2].items[0]).toHaveProperty('amount', 1);
+    });
+
+    test('item isChecked state should be false', () => {
+      expect(actual[2].items[0]).toHaveProperty('isChecked', false);
+    });
+
+    test('item name should match value of action.item', () => {
+      expect(actual[2].items[0]).toHaveProperty('name', action.item);
+    });
+  });
+});
 
 describe('TOGGLE_IS_CHECKED', () => {
   describe('when isChecked is false', () => {
@@ -20,7 +137,6 @@ describe('TOGGLE_IS_CHECKED', () => {
           ]
         }
       ];
-
       const action = actions.TOGGLE_IS_CHECKED('Draft Latte Cans', 'Original');
       const actual = reducer(state, action);
       const expected = [
@@ -54,7 +170,6 @@ describe('TOGGLE_IS_CHECKED', () => {
           ]
         }
       ];
-
       const action = actions.TOGGLE_IS_CHECKED('Draft Latte Cans', 'Original');
       const actual = reducer(state, action);
       const expected = [
@@ -72,96 +187,5 @@ describe('TOGGLE_IS_CHECKED', () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-});
-
-describe('INCREMENT_AMOUNT', () => {
-  describe('when order state is empty', () => {
-    const state = [];
-    const action = actions.INCREMENT_AMOUNT('Draft Latte Cans', 'Original');
-    const actual = reducer(state, action);
-
-    test('order should have have length of 1', () => {
-      expect(actual.length).toBe(1);
-    });
-
-    test('section.name should match action.section', () => {
-      const name = actual[0].name;
-      expect(name).toBe(action.section);
-    });
-
-    test('section.items should have length of 1', () => {
-      const items = actual[0].items;
-      expect(items.length).toBe(1);
-    });
-
-    test('item.amount should be 1', () => {
-      const amount = actual[0].items[0].amount;
-      expect(amount).toBe(1);
-    });
-
-    test('item.isChecked should be false', () => {
-      const isChecked = actual[0].items[0].isChecked;
-      expect(isChecked).toBeFalsy();
-    });
-
-    test('item.name should match action.item', () => {
-      const name = actual[0].items[0].name;
-      expect(name).toBe(action.item);
-    });
-  });
-
-  describe('when section exists', () => {
-    const state = [
-      {
-        items: [
-          {
-            amount: 1,
-            isChecked: false,
-            name: 'Original'
-          }
-        ],
-        name: 'Draft Latte Cans'
-      }
-    ];
-
-    it('should not add new section', () => {
-      const action = actions.INCREMENT_AMOUNT('Draft Latte Cans', 'Original');
-      const actual = reducer(state, action);
-      expect(actual).toHaveLength(1);
-    });
-  });
-
-  describe('when section does not exist', () => {
-    const state = [
-      {
-        items: [
-          {
-            amount: 1,
-            isChecked: false,
-            name: 'Original'
-          }
-        ],
-        name: 'Draft Latte Cans'
-      }
-    ];
-    const action = actions.INCREMENT_AMOUNT('Retail Coffees', 'Corsica');
-    const actual = reducer(state, action);
-
-    test('order length should increase by 1', () => {
-      expect(actual.length).toBe(2);
-    });
-
-    it('should add new section with name and items properties', () => {
-      const newSection = actual[1];
-      expect(newSection).toHaveProperty('name');
-      expect(newSection).toHaveProperty('items');
-    });
-
-    // it('should add new section with name matching action.section', () => {
-    //   const action = actions.INCREMENT_AMOUNT('Retail Coffees', 'Corsica');
-    //   const actual = reducer(state, action);
-    //   expect(actual[1].name).toBe(action.section);
-    // });
   });
 });
