@@ -3,6 +3,16 @@ import sectionReducer from 'reducers/sectionReducer';
 
 export default (state, action) => {
   switch (action.type) {
+    case types.DECREMENT_AMOUNT:
+      return state
+        .map(section => {
+          if (section.name === action.section) {
+            return sectionReducer(section, action);
+          }
+          return section;
+        })
+        .filter(section => section.items.length > 0);
+
     case types.INCREMENT_AMOUNT:
       const sectionExists = state.find(
         section => section.name === action.section

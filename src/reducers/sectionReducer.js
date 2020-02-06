@@ -3,6 +3,12 @@ import itemsReducer from 'reducers/itemsReducer';
 
 export default (state, action) => {
   switch (action.type) {
+    case types.DECREMENT_AMOUNT:
+      return {
+        name: state.name,
+        items: itemsReducer(state.items, action)
+      };
+
     case types.INCREMENT_AMOUNT:
       return {
         name: state.name,

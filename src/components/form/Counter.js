@@ -20,14 +20,14 @@ const DisplayText = styled.Text`
   text-align: center;
 `;
 
-const Counter = ({ amount, increment }) => {
+const Counter = ({ amount, decrement, increment }) => {
   return (
     <CounterContainer>
       <CounterButton
         icon="minus"
         position="left"
         disabled={!amount}
-        // onPress={decrement}
+        onPress={decrement}
       />
       <Display>
         <DisplayText>{amount}</DisplayText>

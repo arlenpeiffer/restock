@@ -122,6 +122,69 @@ describe('INCREMENT_AMOUNT', () => {
   });
 });
 
+describe('DECREMENT_AMOUNT', () => {
+  const state = [
+    {
+      items: [
+        {
+          amount: 1,
+          isChecked: false,
+          name: 'Original'
+        }
+      ],
+      name: 'Draft Latte Cans'
+    },
+    {
+      items: [
+        {
+          amount: 1,
+          isChecked: true,
+          name: 'Corsica'
+        },
+        {
+          amount: 2,
+          isChecked: false,
+          name: 'Nizza'
+        }
+      ],
+      name: 'Retail Coffees'
+    }
+  ];
+
+  describe('when item has an amount of 1..', () => {
+    describe('and is the last item in a section', () => {
+      const action = actions.DECREMENT_AMOUNT('Draft Latte Cans', 'Original');
+      const actual = reducer(state, action);
+
+      test('section should be removed from order', () => {
+        expect(actual).toHaveLength(1);
+        // expect(actual).not.toContain(
+        //   expect.objectContaining({ name: 'Draft Latte Cans' })
+        // );
+      });
+    });
+
+    describe('and is not the last item in a section', () => {
+      const action = actions.DECREMENT_AMOUNT('Retail Coffees', 'Corsica');
+      const actual = reducer(state, action);
+
+      test('item should be removed from section', () => {
+        expect(actual[1].items).toHaveLength(1);
+        // expect(actual[1]).toHaveProperty('name', 'Retail Coffees');
+      });
+    });
+  });
+
+  describe('when item has an amount greater than 1', () => {
+    const action = actions.DECREMENT_AMOUNT('Retail Coffees', 'Nizza');
+    const actual = reducer(state, action);
+
+    test('item amount should decrement by 1', () => {
+      expect(actual[1].items[1].amount).toBe(1);
+    });
+  });
+});
+
 describe('TOGGLE_IS_CHECKED', () => {
   describe('when isChecked is false', () => {
     it('should make isChecked true', () => {

@@ -57,6 +57,7 @@ const Item = ({ section, item }) => {
       <Divider />
       <Counter
         amount={amount}
+        decrement={() => dispatch(actions.DECREMENT_AMOUNT(section, item))}
         increment={() => dispatch(actions.INCREMENT_AMOUNT(section, item))}
       />
     </ItemContainer>

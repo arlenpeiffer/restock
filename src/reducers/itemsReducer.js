@@ -3,6 +3,16 @@ import itemReducer from 'reducers/itemReducer';
 
 export default (state, action) => {
   switch (action.type) {
+    case types.DECREMENT_AMOUNT:
+      return state
+        .map(item => {
+          if (item.name === action.item) {
+            return itemReducer(item, action);
+          }
+          return item;
+        })
+        .filter(item => item.amount > 0);
+
     case types.INCREMENT_AMOUNT:
       const itemExists = state.find(item => item.name === action.item);
 
