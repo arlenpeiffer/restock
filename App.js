@@ -25,7 +25,7 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
-  const [order, dispatch] = useReducer(orderReducer, testInitialState);
+  const [order, dispatch] = useReducer(orderReducer, []);
 
   return (
     <OrderContext.Provider value={{ order, dispatch }}>
