@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 import { Feather } from 'icons';
 
-import OrderContext from 'contexts/OrderContext';
-import useInitialValue from 'hooks/useInitialValue';
-import useIsMounted from 'hooks/useIsMounted';
 import { TOGGLE_IS_CHECKED } from 'actions';
+import OrderContext from 'contexts/OrderContext';
+import useValue from 'hooks/useValue';
 
 const Icon = styled(Feather)`
   color: ${props => (props.isChecked ? 'green' : 'black')};
@@ -27,18 +26,12 @@ const Text = styled.Text`
 
 const Item = ({ section, item }) => {
   const { dispatch } = useContext(OrderContext);
-
-  const initialValue = useInitialValue('isChecked', false, section, item.name);
-  const [isChecked, setIsChecked] = useState(initialValue);
-
-  const isMounted = useIsMounted();
-
-  useEffect(() => {
-    isMounted && dispatch(TOGGLE_IS_CHECKED(section, item.name));
-  }, [isChecked]);
+  const isChecked = useValue(section, item.name, 'isChecked');
 
   return (
-    <ItemContainer onPress={() => setIsChecked(!isChecked)}>
+    <ItemContainer
+      onPress={() => dispatch(TOGGLE_IS_CHECKED(section, item.name))}
+    >
       <Icon
         name={isChecked ? 'check' : 'square'}
         size={18}

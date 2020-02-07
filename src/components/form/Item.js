@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 
 import * as actions from 'actions';
 import { colors } from 'constants/colors';
 import OrderContext from 'contexts/OrderContext';
 import Counter from 'form/Counter';
-import useInitialValue from 'hooks/useInitialValue';
-import useIsMounted from 'hooks/useIsMounted';
+import useValue from 'hooks/useValue';
 
 const Divider = styled.View`
   background-color: ${colors.SAFFRON};
@@ -31,25 +30,8 @@ const Label = styled.Text`
 `;
 
 const Item = ({ section, item }) => {
-  const { order, dispatch } = useContext(OrderContext);
-
-  // const initialValue = useInitialValue('amount', 0, section, item);
-  // const [amount, setAmount] = useState(initialValue());
-
-  // const isMounted = useIsMounted();
-
-  // useEffect(() => {
-  //   isMounted && dispatch(actions.INCREMENT_AMOUNT(section, item));
-  // }, [amount]);
-
-  const initialValue = () => {
-    const sectionExists = order.find(({ name }) => name === section);
-    const itemExists =
-      sectionExists && sectionExists.items.find(({ name }) => name === item);
-    return itemExists ? itemExists.amount : 0;
-  };
-
-  const amount = initialValue();
+  const { dispatch } = useContext(OrderContext);
+  const amount = useValue(section, item, 'amount');
 
   return (
     <ItemContainer>
