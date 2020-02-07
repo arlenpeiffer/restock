@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Header from 'common/Header';
 import OrderContext from 'contexts/OrderContext';
-import reducer from 'reducers';
+import orderReducer from 'reducers/orderReducer';
 import Checklist from 'screens/Checklist';
 import Form from 'screens/Form';
 
@@ -25,7 +25,7 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => {
-  const [order, dispatch] = useReducer(reducer, testInitialState);
+  const [order, dispatch] = useReducer(orderReducer, testInitialState);
 
   return (
     <OrderContext.Provider value={{ order, dispatch }}>
