@@ -4,21 +4,11 @@ import itemsReducer from 'reducers/itemsReducer';
 export default (state, action) => {
   switch (action.type) {
     case types.DECREMENT_AMOUNT:
-      return {
-        name: state.name,
-        items: itemsReducer(state.items, action)
-      };
-
     case types.INCREMENT_AMOUNT:
-      return {
-        name: state.name,
-        items: itemsReducer(state.items, action)
-      };
-
     case types.TOGGLE_IS_CHECKED:
       return {
-        name: state.name,
-        items: itemsReducer(state.items, action)
+        items: itemsReducer(state.items, action),
+        name: state.name
       };
 
     default:
