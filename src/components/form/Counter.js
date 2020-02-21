@@ -20,15 +20,7 @@ const DisplayText = styled.Text`
   text-align: center;
 `;
 
-const Counter = ({ amount, setAmount }) => {
-  const increment = () => {
-    setAmount(amount + 1);
-  };
-
-  const decrement = () => {
-    amount && setAmount(amount - 1);
-  };
-
+const Counter = ({ amount, decrement, increment }) => {
   return (
     <CounterContainer>
       <CounterButton

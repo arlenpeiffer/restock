@@ -1,5 +1,3 @@
-export const ADD_ITEM = 'ADD_ITEM';
-export const ADD_SECTION = 'ADD_SECTION';
-export const REMOVE_ITEM = 'REMOVE_ITEM';
-export const REMOVE_SECTION = 'REMOVE_SECTION';
-export const UPDATE_ITEM = 'UPDATE_ITEM';
+export const DECREMENT_AMOUNT = 'DECREMENT_AMOUNT';
+export const INCREMENT_AMOUNT = 'INCREMENT_AMOUNT';
+export const TOGGLE_IS_CHECKED = 'TOGGLE_IS_CHECKED';
