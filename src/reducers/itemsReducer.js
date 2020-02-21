@@ -19,7 +19,7 @@ export default (state, action) => {
       return stateWithReducedItem.filter(item => item.amount > 0);
 
     case types.INCREMENT_AMOUNT:
-      itemExists
+      return itemExists
         ? stateWithReducedItem
         : [...state, itemReducer(newItem, action)];
 

@@ -20,7 +20,7 @@ export default (state, action) => {
       );
 
     case types.INCREMENT_AMOUNT:
-      sectionExists
+      return sectionExists
         ? stateWithSectionReduced
         : [...state, sectionReducer(newSection, action)];
 
