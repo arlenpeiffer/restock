@@ -24,31 +24,19 @@ describe('sectionReducer', () => {
     [actions.TOGGLE_IS_CHECKED('Retail Teas', 'Hojicha')]
   ];
 
-  test('should return state if action is not defined', () => {
-    expect(sectionReducer(state, {})).toEqual(state);
-  });
+  test.each(table)(
+    'section should have items property whose value is an array',
+    action => {
+      const actual = sectionReducer(state, action);
+      expect(actual).toHaveProperty('items', expect.any(Array));
+    }
+  );
 
-  test.each(table)('should return an object', action => {
-    expect(sectionReducer(state, action)).toEqual(expect.any(Object));
-  });
-
-  test.each(table)('section should have an items property', action => {
-    expect(sectionReducer(state, action)).toHaveProperty('items');
-  });
-
-  test.each(table)('section should have a name property', action => {
-    expect(sectionReducer(state, action)).toHaveProperty('name');
-  });
-
-  test.each(table)('items should be an array', action => {
-    expect(sectionReducer(state, action).items).toEqual(expect.any(Array));
-  });
-
-  test.each(table)('name should match state.name', action => {
-    expect(sectionReducer(state, action).name).toBe(state.name);
-  });
-
-  test.each(table)('name should match action.section', action => {
-    expect(sectionReducer(state, action).name).toBe(action.section);
-  });
+  test.each(table)(
+    'section should have name property whose value matches state.name',
+    action => {
+      const actual = sectionReducer(state, action);
+      expect(actual).toHaveProperty('name', state.name);
+    }
+  );
 });
